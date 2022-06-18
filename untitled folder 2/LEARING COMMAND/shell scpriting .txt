@@ -1,0 +1,82 @@
+   BASIC COMMAND
+cd  = change dir
+cd ~   =  to go to jhome dir
+pwd  = to see current dir
+ls = to show allthe file in current dir
+ls -l = to see bit claery 
+cp = to copythe file
+     cp /home/kalai/file.txt /home/selvan/
+mv = to mive the file
+     mv /home/kalai/file.txt  /home/selvan/
+rm  = to remove the the file
+     rm -rf = /home/kalai/file.txt
+echo  = to sopy the word we give in terminal
+cat  = to showe txt file in terminal
+grep   it grap the we need exact file
+     
+mkdir = to create the dir
+
+touch  = it will create group of dir
+
+chmod =  to alter permission on file
+EX FOR CHMOD
+create the vi test.sh
+  
+#!/bin/sh
+echo "hello leaner"
+  
+to run the file === ./test.sh
+IT WILL GIVE THE PREMISSION DENIED
+
+chmod +R+W+X /test.sh
+chmod 777 test.sh
+  user usergrp everyboby
+0 = 0  = nothing
+1= 1  =  execute
+2 = 2 = write
+3 = 2+1 = w+e
+4=4   =  read
+5 = 4+1 = read+execute
+6 = 4+2 = r+w
+7 = 4+2+1 =r+w+x
+
+man + help  == this will give the man+help to help all command
+
+SHELL SCPRIT BASIC
+
+EXAMPLE.sh
+#!/bash/sh
+# BASIC COMMAND
+# KALAI
+echo "what is your name?"
+read PERSON
+echo "hello, $PERSON"
+
+to run ./EXAMPLE.sh
+
+   VARABILES
+local varabile
+enviromental varabile
+shell varaible
+echo to print the value
+readonly  it only read and not write'
+unset it took the varaibles 
+
+SPECIAL VARABILES
+ $0  === file name of scprit
+ $#  === return of arugment applid to scprit
+ $" ===  this wirteen the all arugement are written in double coated
+ S@ ===  this will written arument one by one in double coated
+ $? === to check exit status of the last program
+ $$ ==== give process number of curent shell scprit
+ 
+
+
+
+
+
+
+
+
+
+

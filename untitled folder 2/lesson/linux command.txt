@@ -1,0 +1,109 @@
+/home --> this is the home directory of the user (EX) /home/user1
+/var --> log  files
+
+log files is used for debugging
+aug 15 9:00:00:12     application xyz started
+
+aug 15 9;00:01:12     aplication crashed
+
+we are using anisible  --> /var/log/ansible.log
+os is very slow  -->    /var /log /message ---> os realted debugging
+/etc  --> configuration files
+/etc /puppet.conf
+
+/tmp---> temporary files
+
+/opt--.> Thirdparty software
+
+/lib--> library files
+
+/root---> home directory of the root
+root --> administrator in linux/highest privilages/unrestricted area
+
+/bin--->storaing the binary files
+
+
+ /dev--->/dev /sda or sdb
+  
+
+ls---> to list files
+ls-l ----> long list format
+clear ----> clear the screen
+mkdir ----> to create the directory
+mkdir test ----> to create the directory called test
+mkdir -p ---> to create group of folder
+pwd ---> check present directory
+cd ---> to go the directory
+cd test ---->to go the test directory
+rm ---> delete the file
+rmdir ---> delte the directory.
+rm -rf/a ----> to delte group of file .
+Cat ----> to go the file
+cp file file123 ---> to copy the file 123  
+
+dpkg  -i chef.dpkg ===== install
+ ==== list
+dpkg -r=====remove
+
+if dont the commAND  type hlep in terminal EX  {help ls } it will show the all command
+ ifcinfig -a ===== this eill show ip of system
+ ping will show the ping of pc
+ netstat
+ traceroute
+ 
+ 
+ hostname 
+ top ==== to give the cpu utlization
+ sudo apt-get install ======== it will install allpacakage requires to the software
+dpkg -i ansbile.dpkg   ===============   it will install only ansible 
+                  SHELL PRPOPERTIE
+                  =================
+ control+a ============to go to begining
+ control+e =================to go to end
+ control+w ===============to remove a word
+ control +u ===============to clear the line
+ tab =============== auto fill the repositsrty value
+ control+r ===========reverse history
+ ==================================================
+                MOUNT
+to ansible in 100 machine
+				
+sudo adduser ===> to create new user 
+sudo keygen =====> to create the ne key
+visudo ======> to give the acess root acess to the others users 
+vi /etc/ssh/sshd config ======> to configure shhd 
+ssh-cpy-id-to give other machine public or private id
+
+
+                GIT
+              ==========
+GIT IS THE VERSION CONTROL TOOL 
+WE USE THE GIT WE CAN go back the the history
+git is open source software and user friendly
+commands
+=========
+git init      to initiate the git repositry in local repo
+git  clone      to clone the data into local repo
+                 
+
+
+
+
+
+
+
+
+
+
+           jenkins
+ 1.get the code from the version control {git}*
+2.executhe build/compile
+3.execute the units test and get the code coverge
+4.execute the automated functional tests
+5.(any other tests is required)
+6.execute the static code anaalysis
+7.deploy the aircraft/build generated to build repository
+8.exitdeliver the ARTIFACT BUILD GENERATED TO TEST MACHINE 
+
+
+

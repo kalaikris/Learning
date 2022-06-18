@@ -1,0 +1,4 @@
+apt-get install tomcat7  ==== to install tomcat in ubuntu
+sudo service tomcat7 service ----- to check tomcat is runnong or not
+then copy jenkis link jenkins .war file
+wget "war file link"

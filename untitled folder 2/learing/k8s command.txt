@@ -1,0 +1,113 @@
+
+========================K8S COMMAND=========================
+kubectl init
+kubectl get nodes
+kubectl apply -f <pathofyml>   ====> to create and modify
+kubectl delete -f <pathofyml> =====> to delete the file
+kubectl get <object-kind> ----> to get the status
+kubectl get pods====> to get hte details of the pod
+kubectl get pods -o wide===> to get full detils of the pod 
+kubectl get pods -w ===>to get the recent activites of the pod 
+kubectl get namespace
+kubectl api-resources ===> all the difference resources avaliable
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================K8S YAML FILE ===============================
+---
+apiversion: v1
+kind: pod
+metadata:
+  name: hello-pod
+spec:
+  container:
+    - image: jenkins:1.609.2
+	  name: jenkins
+	  
+	  
+---
+apiversion: v1
+kind: pod
+spec: 
+  container:
+    - name: mynginx
+	  image: nginx
+	- name: myjenkins
+	  image: jenkins
+
+---
+apiversion: v1
+kind: pod
+metadata:
+  name: hello-pod
+spec:
+  container: 
+    -name: myubuntu
+	 image: ubuntu
+	 
+==========deployement of 3 pods===========
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Unique key of the Deployment instance
+  name: deployment-example
+spec:
+  # 3 Pods should exist at all times.
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomcat
+  template:
+    metadata:
+      labels:
+        # Apply this label to pods and default
+        # the Deployment label selector to this value
+        app: tomcat
+    spec:
+      containers:
+      - name: tomcat
+        # Run this image
+        image: tomcat:8
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+			
+			

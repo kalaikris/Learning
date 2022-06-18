@@ -1,0 +1,36 @@
+server {
+  listen 80;
+  server_name 3.111.198.48;
+  return 301 https://kalaikris.ml;
+}
+
+server {
+  listen 443 ssl;
+  server_name 3.111.198.48;
+
+  ssl_certificate /etc/nginx/ssl/cloudflare/my-cert.crt;
+  ssl_certificate_key /etc/nginx/ssl/cloudflare/my-key.key;
+
+location / {
+    index index.php index.html index.htm; 
+    try_files $uri $uri/ =404;
+}
+
+ location /fileweb {
+    index index.php index.html index.htm;
+}
+ error_page 404 /404.html;
+ error_page 500 502 503 504 /50x.html; 
+ location = /50x.html {
+    root /usr/share/nginx/html;
+}
+
+ location ~ .php$ {
+    try_files $uri =404;
+    fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; 
+    include fastcgi_params;
+ }
+
+}

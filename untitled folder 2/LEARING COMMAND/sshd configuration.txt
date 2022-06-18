@@ -1,0 +1,23 @@
+sudo -i
+sudo apt-get install openssh-server
+vi /etc/ssh/sshd_config
+then give password authencation yes
+service sshd restart
+adduser kalai
+password kalai
+then give the user root acess
+visudo
+kalai ALL=(ALL:ALL) NOPASSWD:ALL
+
+then we acess the user without keypair
+
+for that
+ssh kalai@ipaddress of the server
+ssh-keygen ====> this will create public and private key
+the key will default location
+cd ~/.ssh/
+id_rsa   id_rsa.public
+to copy id_rsa.public into server machine for that
+
+ssh-copy-id kalai@ipadress of another machine
+

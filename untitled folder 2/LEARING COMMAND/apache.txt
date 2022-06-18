@@ -1,0 +1,112 @@
+sudo apt-get install apache2
+to see config file
+vi /etc/httpd/conf/httpd.config
+to change the web page content
+vi /var/www/html/index.html/index
+to restart apache 
+service apache2 resatrat
+service apache2 start
+to add the firewall permisiion
+firewall-cmd--permantely--zone=public--add-service=http (OR) httpd
+firewall-cmd--list=service   to see service list
+firewall-cmd--restart
+firewall-cmd--start
+httpd-t to all syntax or correct
+
+
+To ADD NEW FOLDER WEB PAGE
+semange fcontext -a -t httpd_sys_context_t "/foldername(/.*)?"  TO ADDD 
+semange fcontext -d -t httpd_sys_context_t "/foldername(/.*)?"  TO DELETE 
+semange fcontext --list |  grep foldername   TO SEE THE CONTANT
+restorecon -vFR /foldername  TO RESTART THE SERVICE
+
+
+     TO CREATE THE VIRTUAL IP IN LINUX
+to configure multi webpages
+to create the virtual ip
+to copy the file called ifcg-ens33
+/etc/sysconfig/network-scprits/ifcg-ens33  file location
+
+<VirtualHost 192.168.19.100:8080
+    documentroot "/var/www/kalai" we have give html file
+	     servername www.kalai.com
+		 errorlog "/var/log/hsn/error_log"
+	customlog "/var/log/hsn/acess_log" combined
+</virtualhost>
+<directory "/kalai"
+  options indexs followssyslinks
+  allowoverride none
+  require all granted
+</directory>
+ 
+ <VirtualHost 192.168.19.100:8081
+    documentroot "/var/www/selvan" we have to give html file
+	     servername www.selvan.com
+		 errorlog "/var/log/hsn/error_log"
+	customlog "/var/log/hsn/acess_log" combined
+</virtualhost>
+<directory "/kalai"
+  options indexs followssyslinks
+  allowoverride none
+  require all granted
+</directory>
+ 
+        IMPORTANT STEPS AFTER CONFIG PORTS
+ AFTER INSERT ALL ports to edit listen ports in config file
+ TO ADD ALL PORTS WE HAVE TO GIVE IN DIRECTORY FILE
+ TO ADD PORTS TO FIREWALL
+ firewall-cmd --permanent --zone=public --add-port=8080/tcp
+ 
+ 
+             TO ADD SSL CERTIFICATE TO APACHE 
+ PROCESS TO CSR FILE
+ 
+ to install some software
+ yum install openssl
+ yum install mod_ssl
+ 
+ TO CHECK 
+ rpm -qa openssl
+ rpm -qa mod_ssl
+ 
+            TO GENERATE CSR FILE
+ frist we HAVE CREATE THE KEY
+ 
+ RSA ===> encryption and decryption processse
+ SHA1 to SHA2 (sha256latest)  ===> secure acesss to tranfer data into code
+ 
+            KEY FILE
+ openssl genrsa -out kalai.key 2048 (OR) 4096
+ to see the key 
+ cat kalai.key
+ 
+        TO REQUESRT CSR FILE
+openssl req -new -key kalai.key -out -kalai.csr -sha256
+if we request some information
+country name
+state
+city
+organization name
+organization unit name
+common name
+email add
+
+          TO check  CSR FILE
+openssl req -noout -text -in hsn.csr
+
+     TO GENREATE CERTIFICATE FILE
+openssl x509 -req -days 365 -in kalai.csr -signkey kalai.key -out kalai.crt
+
+to move file in this location
+cd /etc/pki/tls
+
+kalai.key in private folder
+kalai.crt  in  certs folder
+
+
+
+ 
+
+
+
+

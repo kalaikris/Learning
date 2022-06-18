@@ -1,0 +1,47 @@
+using ansible deployement of sample aplication
+in playbooks it also know as YAML
+#YAML
+#MODULES
+#TASK
+#ANSIBLE-ENVIROMENT VARAIBLE
+#INVENTORY
+#ANSIBLE CONFIGURATION
+
+
+###YAML INTRODUCTION
+it much like json
+it collection of name value pairs  
+EX
+<name> <value>
+        value must text number boolean
+name: "devops"
+age: "24"
+isonline: "yes"
+courses:
+  -devops
+  -aws
+  -azure
+address:
+  -flatno: 208-b
+   apartment: nilagiri
+   landmark: ameerpet metro
+   -flatno: 209-b
+    apartment: nilagirils
+    landmark: ameerpet metro land
+search: 
+  from: hyderbad
+  to: rjy
+  start_date: 11/8/2021
+  return_date: 14/8/2021
+results:
+  -travles:
+   starttime:
+   journeytime:
+   price:
+   type:
+   amenties:
+     -tv
+	 -ac
+  
+  
+

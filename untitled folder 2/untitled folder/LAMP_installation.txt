@@ -1,0 +1,104 @@
+LAMP Installion:
+
+
+sudo yum update -y
+
+sudo yum install nano curl wget bind-utils telnet
+
+Apache HTTP & HTTPS 
+
+sudo yum install -y httpd mod_ssl openssl 
+
+sudo systemctl enable httpd.service
+
+sudo systemctl start httpd.service
+
+sudo systemctl status httpd.service
+
+systemctl restart php-fpm
+
+Replace none with all in httpd.conf
+
+yum install firewalld -y
+
+systemctl start firewalld
+
+systemctl enable firewalld
+
+systemctl status firewalld
+
+
+sudo firewall-cmd --permanent --zone=public --add-service=http 
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
+
+—> PHP installation  Link: https://techviewleo.com/install-php-7-on-amazon-linux/ 
+which amazon-linux-extras
+
+If the command doesn’t return any output, then install the package that will configure the repository:
+
+sudo yum install -y amazon-linux-extras
+
+sudo  amazon-linux-extras | grep php
+
+sudo amazon-linux-extras enable php7.4
+
+sudo yum clean metadata
+
+sudo yum install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap}
+
+php -v
+
+nano /etc/php.ini
+
+# search and change the below values
+upload_max_filesize = 2047M
+post_max_size = 2048M 
+memory_limit = 2048M
+
+PHPMYADMIN Installation:
+
+Ls
+
+sudo curl -o phpMyAdmin-5.1.1-all-languages.tar.gz https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.tar.gz
+
+sudo tar xvf phpMyAdmin-5.1.1-all-languages.tar.gz
+
+sudo rm -rf phpMyAdmin-5.1.1-all-languages.tar.gz
+
+sudo mv phpMyAdmin-*/ /usr/share/phpmyadmin
+
+sudo mkdir -p /var/lib/phpmyadmin/tmp
+
+sudo chown -R apache:apache /var/lib/phpmyadmin
+
+sudo mkdir /etc/phpmyadmin/
+
+sudo cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
+
+sudo nano /usr/share/phpmyadmin/config.inc.php
+
+# Add 
+$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';
+
+sudo nano /etc/httpd/conf.d/phpmyadmin.conf
+
+# Apache configuration for phpMyAdmin
+Alias /phpMyAdmin /usr/share/phpmyadmin/
+Alias /phpmyadmin /usr/share/phpmyadmin/
+ 
+<Directory /usr/share/phpmyadmin/>
+   AddDefaultCharset UTF-8
+ 
+   <IfModule mod_authz_core.c>
+     # Apache 2.4
+     Require all granted
+   </IfModule>
+   <IfModule !mod_authz_core.c>
+     # Apache 2.2
+     Order Deny,Allow
+     Deny from All
+     Allow from 127.0.0.1
+     Allow from ::1
+   </IfModule>
+</Directory>

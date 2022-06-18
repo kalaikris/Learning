@@ -1,0 +1,65 @@
+YAML CODING
+hosts: nodes in the inveniory
+sytax of hosts: name value pair
+become: do you wnat became root user or what
+task: list of the inodividual task
+task: wiriting some of the task properties
+tasks:
+  -name:
+   <module_name>:
+   <module_arg1>: <module_value>
+   ..
+   ..
+   ..
+   state: <module support state>
+   
+ =====EX PLAYBOOK=========
+HOSTS: ALL
+BECOME: YES
+tasks:
+  -name: install git
+   package:
+     name: git
+     state: present
+  -name: unistall git
+   pacakage: 
+    - name: update ubuntu packages and install tree
+      apt:
+       name: tree
+       update_cache: yes
+       state: present
+~
+
+   adhoc command
+   syntax
+   ANSIBLE _I <inventorypath> -m <moduename> -a"para1=value1.....param=valaue" [-b]<ALL>
+
+~/myfoldername ansible -i filename -m apt -a "name=tree state=present" -b all
+
+
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install httpd
+      yum: 
+        name: httpd
+        state: present
+      notify:
+        - restart and enable httpd
+    - name: install php modules
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - php
+        - php-mysql
+      notify:
+        - restart and enable httpd
+  handlers:
+    - name: restart and enable httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted
+Share this:

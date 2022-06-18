@@ -1,0 +1,245 @@
+                 DOCKER COMMANDS
+docker --version   == to get the version details
+docker info 
+docker image built -t |name of image| |path of the dockerfile|
+docker images ls  ==== to show image details
+docker container run |nameofimage|   
+docker container run -d -p 8081:8080 spc === to run the container in thisip address
+docker container ls ==== to show the container list
+
+docker image built -(t)==> is the tags are important in dockers v 
+docker image built -t spc:(DDMMYYYY) togivename or anything to rember me what are we using
+docker container run -d |name of cotainer|  === detached mode
+docker container run -it jenkins /bin/bash  ==== interactive mode
+PRESS CONTROL+C EXIT THE CONTAINER
+ALPINE IS THE SMALL LINUX SYSTEM IT WILL RUN IN SH MODE NOT BASH MODE
+docker container ls -a ====> IT EILL SHOW ALL THE CONTAINER IN RUNNING AND STOPPED STATE
+docker contauner rm <name OR ID>
+docker container ls -a -q IT WILL show ALL CONTAINETR ID 
+docker container rm -f $(docker container ls -a -q) it will remove all the container docker container rm -f $(docker container ls -a -q)
+docker container rm -f $(docker container ls -a -q)
+docker container rm -f $(docker container ls -a -q)
+  
+docker container run --help
+docker inspect 
+docker volume create
+docker volume ls
+docker stats
+docker container run --name cont3 --mount "source=myvol,target=/app" -d -p 8080:8080 openjdk:8 java -jar /app/spring-petclinic.jar
+
+docker container run --name cont4 --mount "source=myvol,target=/app" -d -p 8081:8080 openjdk:8 java -jar /app/spring-petclinic.jar
+
+docker container ls
+
+docker volume ls
+
+# remove all the containers
+docker container rm -f $(docker container ls -a -q)
+docker container run --name cont5 --mount "type=bind,source=/app,target=/jars" -d -p 8080:8080 openjdk:8 java -jar /jars/spring-petclinic.jar
+
+EXCUTE THE COMMAND INSIDE THE CONTAINER
+docker container run --name tomcat -d tomcat:8
+docker container exec tomcat la=======>(TO ENTER THE RUNNING CONTAINER)
+docker container exec tomcat ip addr ===> (TO SEE THE IP OF THE CONTAINER)
+docker container exec tomcat ls
+docker container exec tomcat ps -eaf ===> (TO SHOW THE DETAIL OF THE CONTAINER)
+docker container exec -it tomcat /bin/bash ====> (TO ENTER THE CONTAINER IN RUNNING STATE)
+docker container run -d (name 0f the container)
+docker stats
+docker container stats
+  ((((((((((((((STARTING AND STOPPING CONTAINER))))))))))
+docker container stop (notc)
+docker container start (notc)
+docker container pause (notc)
+docker container unpause (notc)
+docker container create ubuntu (TO CREATE THE CONTAINER)
+docker container export (notc) (TO GIVE THE TAR FILE OF THE CONTAINER)
+docker container exec -it ubuntu /bin/bash ====> (TO ENTER THE CONTAINER IN RUNNING STATE)
+docker image history (notc)
+docker image history (notc):(Tag)
+docker container history (notc)
+docker container run -d -p 8081:8080 tomcat:8 (TO CHOOSE THE PORT OF THE CONTAINER)
+docker container run --name tomcat1 -d -p 8081:8080 tomcat:8
+docker container run --name tomcat2 -d -P tomcat:8 (CAP P WILL ALLCOTATE THE FREE PORT)
+docker container run --name p1 --network mybridge -d alpine sleep 1d
+docker network create mybridge
+DOCKER EXEC P1 PING -C 3 C1
+docker network connect mybridge (c1) ===> TO MOVING THE CONTAINER IN OTHER NETWORK THEY WILL COMMUCATE EACH OTHER
+IN THE CASE BOTH CONTAINER CAN RESOLVE NAME AND IPADRESS LIKE HOST METHOD
+  
+      DOCKER SWARM 
+	  
+((( docker swarm init --advertise-addr))) (IP ADDRESS) THIS WILL COMMAND TO JOIN AS A MANAGER OR WORKER 
+
+docker service create --replicas 2 --name tomcat tomcat:8
+docker service ls
+docker service inspect --perty tomcat 
+docker service ps tomcat
+dovker node ps
+docker node ls
+docker service scale tomcat=10
+docker service create --name jenkins --replicas 2 --update-delay 10s --published=8081,target=8080 jemkins:1.609.2
+docker service scale jenkins=4
+docker service ps jenkins
+docker service update --image jenkins:latest jenkinsjenkinsv  hed
+
+ 
+
+
+
+
+ ==========================FRIST CODING+++=================
+ DOCKER CODEING
+ FROM ubuntu
+ RUN "apt-get update"
+ RUN "apt-get install apache2 -y" 
+  
+================= next APPLICATION IS SPRINGPETCLINIC=================
+ FROM openjdk 8
+ RUN "give  the file or give the url"
+ EXPOSE "8080"
+ CMD "give the file namewhen we re download"
+   ------EX-----
+   "RUN" ISCOMMAND TO BULDTHE IMAGE
+   "CMD" IS COMMAND TO BUILD or CREATE THE COINATER TO THE IMAGE it will changed"
+   "FROM" to choose the base image
+   "EXPOSE" to espose port used by container
+   "ENTRYPOINY" it cannot be changed
+   "USER" to add root user in docker
+   "WORKDIR" to create the root folder in docker   
+   
+   docker used ubuntu file called aufs
+   docker used redhat file called overlay2
+   
+ open mrs dockerfile  
+   
+FROM maven:3-jdk-8 as mvn
+LABEL author='Khaja'
+RUN git clone https://github.com/openmrs/openmrs-core.git && cd openmrs-core && mvn clean package
+ 
+FROM tomcat:8
+LABEL author='Khaja'
+COPY --from=mvn /openmrs-core/webapp/target/openmrs.war /usr/local/tomcat/webapps/openmrs.war
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+-----pod specification ---------
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: openmrscore
+  labels:
+    app: openmrscore
+    ver: 2.4.0
+spec:
+  containers:
+    - name: openmrscore
+      image: shaikkhajaibrahim/openmrs-core:2.4.0
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+
+---mysql configuration-------
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mysql
+  labels:
+    app: db
+    ver: 5.6
+spec:
+  containers:
+    - name: mysql
+      image: mysql:5.6
+      ports:
+        - containerPort: 3306
+          protocol: TCP
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: openmrs
+        - name: MYSQL_USER
+          value: directdevops
+        - name: MYSQL_PASSWORD
+          value: directdevops
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure-managed-disk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: default
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysqlvolume
+		  env:
+			- name: MYSQL_DATABASE
+			  value: 'openmrs'
+			- name: MYSQL_USER
+			  value: 'directdevops'
+			- name: MYSQL_PASSWORD
+			  value: 'directdevops'
+			- name: MYSQL_ROOT_PASSWORD
+			  value: 'password'
+      volumes:
+        - name: mysqlvolume
+          persistentVolumeClaim:
+            claimName: azure-managed-disk
+
+
+
+
+
+
+Basic
+: docker version
+: docker -v
+: docker info
+: docker --help
+: docker login
+————————————
+Images
+: docker images
+: docker pull
+: docker rmi
+————————————
+Containers
+: docker ps
+: docker run
+: docker start
+: docker stop
+————————————
+System
+: docker stats
+: docker system df
+: docker system prune

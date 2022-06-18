@@ -1,0 +1,50 @@
+configuration management'
+                                 ANSIBLE
+
+For any application we need to work some software.
+ option installing necessary software and deployint the application
+ 
+ 
+ manaual
+ admin will install the nessarey softwares
+ admin will deploynthe application
+ problems
+     #slow
+	 #error prone
+##shell /poweshell scriprts
+#create a shell/ powershell scripts
+
+
+
+
+
+               to setup anisible in two linux machine ubuntu
+			   =============================================
+sudo -i
+vi /etc/ssh/sshd-config 
+adduser kalai
+su kalai
+visudo     to give permission
+then after install ansible and do same operation in {node server}
+to install ansible 
+ sudo apt update
+ sudo apt install software-properties-common
+ sudo add-apt-repository --yes --update ppa:ansible/ansible
+ sudo apt install ansible
+ sudo apt-get install python -y
+
+{{{this is way login to different machine without login }}}}
+
+{{{{then create key by (((ssh-keygen)))
+to see the key ((~/.ssh/ ))
+                ssh-copy-id kalai@(node 1 private ip adress)}}}
+
+then go home dir and go to ansible give ls to see the hosts file
+then edit hosts file using vi editor
+then give the  node private ip address
+then  type ansible -m ping all
+
+ssh-keygen
+~/.ssh/
+then you will see two key called public and privtte
+ssh-copy-id @ipaddress of another machine then you able login another macjhine

@@ -1,0 +1,37 @@
+useradd kalaic ===== to add the user
+sudo passwd kalai ==== to set the after the user create
+sudo mkhomedir_helper kalai ==== to create the home dir for the user
+ls -la  === to show the hidden 
+sudo useradd -m kalai1 ==== this will home dir iteself
+sudo useradd -c "kalaiselvan" kalai ==== to add full name of the user
+sudo useradd -s /bin/sh kalai === to add shell to create the user
+sudo usermod -s /bin/sh kalai=== to modify the shell after creating the user
+sudo usermod -c "kalaiselvan" kalai === to modify name after creating the user
+sudo usermod -U selvan == to unlock the user after unlock the user change the user password is important
+sudo usermod -L selvan == to lock the user 
+sudo passwd -e selvan === the user enter the passwd to login next time
+sudo chage -E 2021/12/12 selvan ==== the user expires after the date 
+to want more deatils ### man usermod/passwd/chage####
+### TO DELETE THE USER ####
+sudo userdel kalai1 == to delete the user 
+sudo userdel -r kalai1 === to delte user and also home directory
+
+
+adduser is the best command to create the user 
+
+### GROUP
+
+sudo  groupadd -g 1234 USERLOC === this will create the group by group id
+sudo groupadd userloc == this wil create the group
+
+man groupadd
+
+## files
+
+[ - ] === regularfiles
+[ d] ==== directory files
+special files    blockfiles [b]
+                 characterdevice files [c]
+                 pipe files [p]
+                 symbolic links [l]
+                 socket files [s]
